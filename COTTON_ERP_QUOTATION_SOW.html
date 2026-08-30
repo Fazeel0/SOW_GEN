@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Proposal & Scope of Work - Cotton ERP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #cbd5e1;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Each .page is exactly A4 portrait */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: #fff;
+            margin: 12px auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 13mm 15mm 9mm 15mm;
+            position: relative;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Page content area grows to fill space between header and footer */
+        .page-content {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ──── Print Rules ──── */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        @media print {
+            body { background: #fff !important; }
+            .page {
+                margin: 0 !important;
+                box-shadow: none !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            .page:last-child { page-break-after: auto; }
+            .no-print { display: none !important; }
+        }
+
+        /* ──── Document Header (Page 1 top) ──── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 11px;
+        }
+        .doc-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-bottom: 4px;
+        }
+        .doc-header h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.4px;
+            line-height: 1.1;
+        }
+        .doc-header p {
+            font-size: 11.5px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+        .meta {
+            text-align: right;
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.7;
+        }
+        .meta strong { color: #0f172a; }
+
+        /* ──── Page 2 Running Header ──── */
+        .page-running-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 7px;
+            margin-bottom: 11px;
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .page-running-header span:last-child { color: #2563eb; }
+
+        /* ──── Footer ──── */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 7px;
+            margin-top: 8px;
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .page-footer strong { color: #475569; }
+
+        /* ──── Client Card ──── */
+        .client-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 11px;
+        }
+        .client-card-item span {
+            display: block;
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #94a3b8;
+            margin-bottom: 2px;
+        }
+        .client-card-item strong { font-size: 13px; color: #0f172a; }
+
+        /* ──── Section Title ──── */
+        .section-title {
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #0f172a;
+            border-left: 3px solid #2563eb;
+            padding-left: 7px;
+            margin: 10px 0 7px 0;
+        }
+
+        /* ──── Overview Box ──── */
+        .overview-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 9px 12px;
+            font-size: 11px;
+            color: #334155;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .overview-box p { margin-bottom: 5px; }
+        .overview-box ul { padding-left: 16px; }
+        .overview-box li { margin-bottom: 3px; }
+
+        /* ──── Modules Table (Single Row Layout) ──── */
+        .modules-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .modules-table thead tr {
+            background: #f1f5f9;
+        }
+        .modules-table th {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #475569;
+            padding: 7px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .modules-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        .modules-table tr:last-child td { border-bottom: none; }
+        .modules-table tr:nth-child(even) { background: #f8fafc; }
+        .mod-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1e293b;
+            white-space: nowrap;
+        }
+        .mod-desc {
+            font-size: 10.5px;
+            color: #475569;
+            line-height: 1.45;
+        }
+        .mod-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        /* ──── Pricing Table ──── */
+        table.ptable {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        table.ptable th {
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 7px 9px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        table.ptable td {
+            padding: 7px 9px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-size: 11px;
+            vertical-align: top;
+        }
+        table.ptable tr:last-child td { border-bottom: none; }
+        .tr { text-align: right !important; }
+        .total-row { background: #f8fafc; font-weight: 700; }
+        .grand-row { background: #eff6ff; font-weight: 800; color: #1d4ed8; }
+        .sub-text { font-size: 9.5px; color: #94a3b8; display: block; margin-top: 1px; }
+
+        /* ──── Payment Pills ──── */
+        .pills {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 6px 0 10px 0;
+        }
+        .pill {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .pill .pct { font-size: 18px; font-weight: 800; color: #2563eb; }
+        .pill .stage { font-size: 10.5px; font-weight: 700; color: #0f172a; margin: 2px 0; }
+        .pill .desc { font-size: 9.5px; color: #64748b; line-height: 1.3; }
+
+        /* ──── Signatures ──── */
+        .sigs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .sig-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 9px 12px;
+            background: #f8fafc;
+        }
+        .sig-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .sig-role { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; color: #64748b; }
+        .sig-badge { background: #eff6ff; color: #2563eb; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+        .sig-line { height: 30px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 6px; font-size: 9.5px; color: #94a3b8; font-style: italic; display: flex; align-items: flex-end; }
+        .sig-name { font-size: 13px; font-weight: 800; color: #0f172a; }
+        .sig-co { font-size: 10.5px; font-weight: 600; color: #475569; }
+        .sig-sub { font-size: 9.5px; color: #94a3b8; margin-top: 2px; }
+
+        /* ──── Print Button ──── */
+        .print-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+        .print-bar button {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 28px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+            font-family: 'Inter', sans-serif;
+        }
+        .print-bar button:hover { background: #1d4ed8; }
+
+    </style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+    <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+
+<!-- ═══════════════ PAGE 1 ═══════════════ -->
+<div class="page">
+    <!-- Document Header -->
+    <div class="doc-header">
+        <div>
+            <div class="doc-badge">Official Quotation &amp; Scope of Work</div>
+            <h1>Cotton ERP Software Proposal</h1>
+            <p>Dedicated Cotton Ginning, Weighbridge &amp; Accounts System</p>
+        </div>
+        <div class="meta">
+            <div>Ref: <strong>QT-COTTON-2026-01</strong></div>
+            <div>Date: <strong>August 30, 2026</strong></div>
+            <div>Validity: <strong>30 Days</strong></div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-content">
+        <!-- Client Card -->
+        <div class="client-card">
+            <div class="client-card-item">
+                <span>Client / Company</span>
+                <strong>Vaibhav Cotton Industries</strong>
+            </div>
+            <div class="client-card-item">
+                <span>Deployment Architecture</span>
+                <strong>Dedicated Server &amp; Custom Domain</strong>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-title">1. Executive Overview &amp; Business Workflow</div>
+        <div class="overview-box">
+            <p>This proposal covers end-to-end engineering of a standalone, dedicated ERP system for Cotton Ginning Mills:</p>
+            <ul>
+                <li><strong>Procurement (Buying from Farmers):</strong> Weighbridge Load/Unload gross &amp; tare weight recording, moisture/trash allowances, Sauda rates, Hamali (labor) and Kanta fee deductions with instant printable slips.</li>
+                <li><strong>Corporate Sales (Selling to B2B Companies):</strong> Bulk trade invoicing for Cotton Bales, Seeds, and Linters with GST &amp; transport compliance.</li>
+                <li><strong>Returns &amp; Ledger:</strong> Two-way return management with live farmer/buyer running balances and party ledger statements.</li>
+            </ul>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-title">2. Scope of Work — Modules Included</div>
+        <table class="modules-table">
+            <thead>
+                <tr>
+                    <th style="width:4%">#</th>
+                    <th style="width:27%">Module</th>
+                    <th>Detailed Scope &amp; Features</th>
+                    <th style="width:13%">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="mod-name">👤 Farmer &amp; Company Directory</span></td>
+                    <td><span class="mod-desc">Complete farmer profiles with Aadhaar, Village, Phone, Bank Account &amp; Vehicle No. Corporate buyer profiles with GSTIN, Billing/Shipping Address, State Code &amp; Credit Limits. Instant search &amp; filter by any field.</span></td>
+                    <td><span class="mod-tag">Existing+</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="mod-name">⚖️ Cotton Purchase (Weighbridge)</span></td>
+                    <td><span class="mod-desc">Load Weight − Unload (Tare) = Gross Weight → Less Moisture Allowance = Net Quintals → × Sauda Rate − Hamali − Kanta Charges ± Round Off = Net Payable to Farmer. Custom printable procurement voucher with multi-party signatures.</span></td>
+                    <td><span class="mod-tag">New</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="mod-name">🏢 Corporate Sales &amp; Invoicing</span></td>
+                    <td><span class="mod-desc">B2B trade invoicing for Cotton Bales, Seeds &amp; Linters. HSN code management, CGST/SGST/IGST tax selection, vehicle/truck no., LR Number, E-Way bill reference, and print-ready trade invoice.</span></td>
+                    <td><span class="mod-tag">New</span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="mod-name">🔄 Two-Way Returns</span></td>
+                    <td><span class="mod-desc">Purchase Return: weight correction / quality rejection debit notes to farmers with automatic ledger deduction. Sales Return: B2B credit notes from companies with stock re-entry and party balance adjustment.</span></td>
+                    <td><span class="mod-tag">New</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="mod-name">📊 Accounts &amp; Party Ledger</span></td>
+                    <td><span class="mod-desc">Real-time Debit/Credit running balance for each Farmer and Company. Cash In/Out tracking with payment mode (Cash, UPI, NEFT, Cheque). Date-range filtered account statements, PDF export.</span></td>
+                    <td><span class="mod-tag">New</span></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="mod-name">💬 WhatsApp Messenger</span></td>
+                    <td><span class="mod-desc">One-click WhatsApp dispatch of purchase vouchers to farmer mobile, sales invoices to company buyer, and payment receipts — directly from within the application on transaction completion.</span></td>
+                    <td><span class="mod-tag">New</span></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="mod-name">💸 Expense Management</span></td>
+                    <td><span class="mod-desc">Categorized mill expense tracking: Hamali labor, vehicle freight &amp; transport, electricity/generator fuel, machine maintenance, and general office overhead with monthly and yearly reports.</span></td>
+                    <td><span class="mod-tag">Existing</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="mod-name">🌐 Hosting &amp; Domain</span></td>
+                    <td><span class="mod-desc">Independent standalone codebase &amp; isolated database (no shared infrastructure). Custom domain (.com/.in) registration, DNS configuration, and 1-year SSL/TLS certificate for HTTPS encryption.</span></td>
+                    <td><span class="mod-tag">Infra</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+        <span>CONFIDENTIAL • SOFTINFOX by Five7 IT Solutions</span>
+        <span>Commercial Proposal — QT-COTTON-2026-01</span>
+        <span>Page <strong>1 of 2</strong></span>
+    </div>
+</div>
+
+<!-- ═══════════════ PAGE 2 ═══════════════ -->
+<div class="page">
+    <!-- Running Header -->
+    <div class="page-running-header">
+        <span>SOFTINFOX • Cotton ERP Software Proposal</span>
+        <span>Ref: QT-COTTON-2026-01 • Vaibhav Cotton Industries</span>
+    </div>
+
+    <!-- Content -->
+    <div class="page-content">
+        <!-- Section 3: Pricing -->
+        <div class="section-title">3. Financial Quotation &amp; Investment</div>
+        <table class="ptable">
+            <thead>
+                <tr>
+                    <th style="width:6%">S.No</th>
+                    <th>Deliverable / Module Description</th>
+                    <th style="width:18%">Category</th>
+                    <th class="tr" style="width:20%">Amount (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td>
+                    <td><strong>Core ERP Base Engine &amp; Platform Licensing</strong><span class="sub-text">Auth, Framework, Dashboard, Security, Baseline Expense Module</span></td>
+                    <td>Existing Engine</td>
+                    <td class="tr">₹30,000.00</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td><strong>Custom Cotton Industry Engineering</strong><span class="sub-text">Weighbridge Purchase, Farmer Voucher, B2B Sales, Returns, Party Ledger &amp; WhatsApp</span></td>
+                    <td>Custom Development</td>
+                    <td class="tr">₹40,000.00</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td><strong>Custom Domain Registration &amp; SSL Configuration (1 Year)</strong></td>
+                    <td>Domain &amp; Security</td>
+                    <td class="tr">₹1,500.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3" class="tr"><strong>Sub-Total (Development + Domain):</strong></td>
+                    <td class="tr"><strong>₹71,500.00</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="tr">Applicable GST @ 18% (on ₹70,000 Development):</td>
+                    <td class="tr">₹12,600.00</td>
+                </tr>
+                <tr class="grand-row">
+                    <td colspan="3" class="tr"><strong>TOTAL INITIAL INVESTMENT:</strong></td>
+                    <td class="tr"><strong>₹84,100.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 4: AMC -->
+        <div class="section-title">4. Annual Cloud Hosting &amp; Maintenance (AMC)</div>
+        <table class="ptable">
+            <thead>
+                <tr>
+                    <th>Item Description</th>
+                    <th style="width:22%">Frequency</th>
+                    <th class="tr" style="width:22%">Amount (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cloud Server Hosting, Automated Daily Backups &amp; Technical Support</strong></td>
+                    <td>Yearly (Post Year 1)</td>
+                    <td class="tr">₹30,000.00</td>
+                </tr>
+                <tr>
+                    <td>Applicable GST (18%)</td>
+                    <td>Yearly</td>
+                    <td class="tr">₹5,400.00</td>
+                </tr>
+                <tr class="grand-row">
+                    <td colspan="2" class="tr"><strong>TOTAL ANNUAL RECURRING CHARGES:</strong></td>
+                    <td class="tr"><strong>₹35,400.00 / year</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 5: Payment Schedule -->
+        <div class="section-title">5. Payment Schedule &amp; Milestones</div>
+        <div class="pills">
+            <div class="pill">
+                <div class="pct">60%</div>
+                <div class="stage">Advance Payment</div>
+                <div class="desc">Project kickoff, standalone repo &amp; domain provisioning — ₹50,460</div>
+            </div>
+            <div class="pill">
+                <div class="pct">30%</div>
+                <div class="stage">Mid-Milestone</div>
+                <div class="desc">Purchase, Sales &amp; Ledger modules completed — ₹25,230</div>
+            </div>
+            <div class="pill">
+                <div class="pct">10%</div>
+                <div class="stage">Final Delivery</div>
+                <div class="desc">WhatsApp, testing &amp; production go-live — ₹8,410</div>
+            </div>
+        </div>
+
+        <!-- Section 6: T&C -->
+        <div class="section-title">6. Terms &amp; Conditions (Service Boundaries)</div>
+        <div class="overview-box">
+            <ul>
+                <li><strong>Third-Party API Charges:</strong> WhatsApp Cloud API message credits (Meta/Twilio), SMS gateways, E-Way Bill/E-Invoice GSP portal fees, and payment gateway MDR charges are billed directly by respective providers — not included in this quotation.</li>
+                <li><strong>Out of Scope:</strong> Any feature or module not explicitly listed in Section 2 shall be scoped and quoted as a separate change request.</li>
+                <li><strong>Data &amp; Backups:</strong> Daily automated backups are part of AMC. Client is responsible for business data accuracy and regulatory compliance.</li>
+                <li><strong>Deployment:</strong> Domain &amp; server setup begins upon 60% advance receipt. Production credentials handed over upon final payment settlement.</li>
+            </ul>
+        </div>
+
+        <!-- Section 7: Signatures -->
+        <div class="section-title">7. Acceptance &amp; Authorization</div>
+        <div class="sigs">
+            <div class="sig-card">
+                <div class="sig-top">
+                    <span class="sig-role">Prepared &amp; Delivered By</span>
+                    <span class="sig-badge">Technology Partner</span>
+                </div>
+                <div class="sig-line">Authorized Signatory &amp; Seal</div>
+                <div class="sig-name">SOFTINFOX</div>
+                <div class="sig-co">by Five7 IT Solutions</div>
+                <div class="sig-sub">Enterprise Software &amp; Cloud Engineering</div>
+            </div>
+            <div class="sig-card">
+                <div class="sig-top">
+                    <span class="sig-role">Accepted &amp; Approved By</span>
+                    <span class="sig-badge">Client Authorization</span>
+                </div>
+                <div class="sig-line">Authorized Signatory &amp; Stamp</div>
+                <div class="sig-name">Vaibhav Cotton Industries</div>
+                <div class="sig-co">Management Approval</div>
+                <div class="sig-sub">Date: ________________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+        <span>CONFIDENTIAL • SOFTINFOX by Five7 IT Solutions</span>
+        <span>Commercial Proposal — QT-COTTON-2026-01</span>
+        <span>Page <strong>2 of 2</strong></span>
+    </div>
+</div>
+
+</body>
+</html>
